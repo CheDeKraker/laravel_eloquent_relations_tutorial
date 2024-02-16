@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Profile;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,9 +15,14 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        foreach (range(1, 10) as $index) {
+            \App\Models\User::factory()->create([
+                'name' => 'Test User ' . $index,
+                'email' => 'test' . $index . '@example.com',
+                'password' => 'password->encrypted(password)',
+            ]);
+        }
+
+        Profile::factory()->count(10)->create();
     }
 }
